@@ -18,15 +18,15 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         <div className={styles.menu_part_left}>
           <NavLink
             to='/'
-            className={({ isActive }) =>
-              `${styles.link} ${isActive ? styles.link_active : ''} text text_type_main-default pt-4 pb-4 pr-5 pl-5`
-            }
-            style={{
+            className={`${styles.link} text text_type_main-default pt-4 pb-4 pr-5 pl-5`}
+            style={({ isActive }) => ({
+              color: isActive
+                ? 'var(--text-primary-color)'
+                : 'var(--text-inactive-color)',
               textDecoration: 'none',
-              color: 'inherit',
               display: 'flex',
               alignItems: 'center'
-            }}
+            })}
           >
             {({ isActive }) => (
               <>
@@ -38,15 +38,15 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
 
           <NavLink
             to='/feed'
-            className={({ isActive }) =>
-              `${styles.link} ${isActive ? styles.link_active : ''} text text_type_main-default pt-4 pb-4 pr-5 pl-5`
-            }
-            style={{
+            className={`${styles.link} text text_type_main-default pt-4 pb-4 pr-5 pl-5`}
+            style={({ isActive }) => ({
+              color: isActive
+                ? 'var(--text-primary-color)'
+                : 'var(--text-inactive-color)',
               textDecoration: 'none',
-              color: 'inherit',
               display: 'flex',
               alignItems: 'center'
-            }}
+            })}
           >
             {({ isActive }) => (
               <>
@@ -68,15 +68,15 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => {
         <div className={styles.link_position_last}>
           <NavLink
             to='/profile'
-            className={({ isActive }) =>
-              `${styles.link} ${isActive ? styles.link_active : ''} text text_type_main-default pt-4 pb-4 pr-5 pl-5`
-            }
-            style={{
+            className={`${styles.link} text text_type_main-default pt-4 pb-4 pr-5 pl-5`}
+            style={({ isActive }) => ({
+              color: isActive
+                ? 'var(--text-primary-color)'
+                : 'var(--text-inactive-color)',
               textDecoration: 'none',
-              color: 'inherit',
               display: 'flex',
               alignItems: 'center'
-            }}
+            })}
           >
             {({ isActive }) => (
               <>

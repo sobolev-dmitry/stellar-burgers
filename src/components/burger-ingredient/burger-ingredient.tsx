@@ -17,7 +17,8 @@ export const BurgerIngredient: FC<TBurgerIngredientProps> = memo(
 
     const count = useMemo(() => {
       if (ingredient.type === 'bun') {
-        return bun?._id === ingredient._id ? 1 : 0;
+        // Булка используется дважды — сверху и снизу
+        return bun?._id === ingredient._id ? 2 : 0;
       }
 
       return ingredients.filter(

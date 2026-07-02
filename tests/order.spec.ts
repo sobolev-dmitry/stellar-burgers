@@ -2,39 +2,36 @@ import { expect, test } from '@playwright/test';
 
 const ORDER_NUMBER = '106820';
 
+// Фейковые токены
+const MOCK_ACCESS_TOKEN = 'mock-access-token-12345';
+const MOCK_REFRESH_TOKEN = 'mock-refresh-token-67890';
+
 test.describe('Создание заказа в конструкторе бургера', () => {
   test.slow();
 
-  test.beforeEach(async ({ page, request }) => {
-    const loginResponse = await request.post(
-      'https://norma.education-services.ru/api/auth/login',
-      {
-        data: {
-          email: 'me@mail.com',
-          password: '123'
-        }
-      }
-    );
+  test.beforeEach(async ({ page }) => {
+    // УБРАЛ реальный запрос request.post к /api/auth/login
 
-    const { accessToken, refreshToken } = await loginResponse.json();
-
+    // Теперь перехватываем все запросы к API из HAR-файла
     await page.routeFromHAR('./tests/hars/app.har', {
       url: '**/api/**',
       notFound: 'fallback'
     });
 
+    // Добавляем фейковый accessToken через cookies
     await page.context().addCookies([
       {
         name: 'accessToken',
-        value: accessToken,
+        value: MOCK_ACCESS_TOKEN,
         domain: 'localhost',
         path: '/'
       }
     ]);
 
+    // Добавляем фейковый refreshToken в localStorage
     await page.addInitScript((token) => {
       localStorage.setItem('refreshToken', token);
-    }, refreshToken);
+    }, MOCK_REFRESH_TOKEN);
 
     await page.goto('/');
     await page.waitForSelector('li', { timeout: 15000 });

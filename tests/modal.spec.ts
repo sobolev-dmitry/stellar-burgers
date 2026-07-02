@@ -4,8 +4,9 @@ test.describe('Модальное окно ингредиента', () => {
   test.slow();
 
   test.beforeEach(async ({ page }) => {
+    // ИСПРАВЛЕНИЕ: теперь перехватываются все запросы к /api/*
     await page.routeFromHAR('./tests/hars/app.har', {
-      url: '**/api/ingredients',
+      url: '**/api/**',
       notFound: 'fallback'
     });
 

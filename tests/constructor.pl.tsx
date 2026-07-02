@@ -4,8 +4,9 @@ test.describe('Конструктор бургеров', () => {
   test.slow();
 
   test.beforeEach(async ({ page }) => {
+    // ИСПРАВЛЕНИЕ: расширил паттерн до **/api/**, чтобы перехватывать все запросы к бэкенду
     await page.routeFromHAR('./tests/hars/app.har', {
-      url: '**/api/ingredients',
+      url: '**/api/**',
       notFound: 'fallback'
     });
 
